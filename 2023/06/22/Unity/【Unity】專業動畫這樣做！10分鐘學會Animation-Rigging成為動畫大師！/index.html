@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>
+        
+            【Unity】專業動畫這樣做！10分鐘學會Animation Rigging成為動畫大師！
+        
+    </title>
+    <link rel="shortcut icon" href="#"/>
+
+    <link type="text/css" rel="stylesheet" href="/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSerifSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="/font/Roboto.css">
+    <link type="text/css" rel="stylesheet" href="/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="/css/base.css">
+    <link type="text/css" rel="stylesheet" href="/css/code.css">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <a id="cover"></a>
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
+<div id="header" class="header">
+    <div class="vertical">
+        <div class="inner">
+            
+                <h1 class="header-subtitle">【Unity】專業動畫這樣做！10分鐘學會Animation Rigging成為動畫大師！</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 發表時間：2023-06-22
+                        </span>
+                        
+                            
+                                <span id="/2023/06/22/Unity/【Unity】專業動畫這樣做！10分鐘學會Animation-Rigging成為動畫大師！/" class="leancloud_visitors" data-flag-title="【Unity】專業動畫這樣做！10分鐘學會Animation Rigging成為動畫大師！">
+                                    <i class="iconfont icon-browse"></i> 閱讀：<sapn class="leancloud-visitors-count"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 評論：<span class="valine-comment-count" data-xid="/2023/06/22/Unity/【Unity】專業動畫這樣做！10分鐘學會Animation-Rigging成為動畫大師！/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                        
+                            <span class="category-color">Unity</span>
+                        
+                            <span class="category-color">動畫</span>
+                        
+                            <span class="category-color">Animation Rigging</span>
+                        
+                    
+                    
+                        
+                            <span class="tag-color">Unity</span>
+                        
+                            <span class="tag-color">Animation Rigging</span>
+                        
+                            <span class="tag-color">IK</span>
+                        
+                            <span class="tag-color">動畫</span>
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+    
+</div>
+<div id="container">
+    
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <p>在開發遊戲的過程中，為了讓遊戲更加生動，我們一定會在角色上加上動畫，最常見的有走路、跑步、跳躍等等。<br>一般來說，我們只要將調好的動畫素材套用到Unity的Animator上，人物就可以根據動畫檔調整好的節點播放指定動畫。然而這些動作只是最基本的而已，如果遊戲中有更多複雜的操作，那我們就勢必得加入相應的動畫。</p>
+<span id="more"></span>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/Yf0th6ALiFA" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<h2 id="一般動畫有什麼難點"><a href="#一般動畫有什麼難點" class="headerlink" title="一般動畫有什麼難點"></a>一般動畫有什麼難點</h2><p>對於跑跳這類，不太需要跟角色本身以外的物體互動的動作來說，直接撥放事先錄製好的動畫檔就可以輕鬆滿足需求，同時也有很好的效果。<br>但是對於像是FPS遊戲中的持槍，動作遊戲中的攀爬等，這些需要與其他物體互動的動作來說，顯然使用事先錄製好的動畫檔的效果就會不理想，因為我們總不可能在錄製動畫檔時，就事先知道這些物體在遊戲開始後的位置，對吧。</p>
+<h3 id="如何解決？"><a href="#如何解決？" class="headerlink" title="如何解決？"></a>如何解決？</h3><p>因此，為了能讓角色的動作看起來更生動自然，我們希望動畫可以動態的根據目標物體進行調整。<br>也就是角色的手會根據槍的位置，或是牆壁上的頂點來移動。<br>要做到這個效果就必須學習反向運動學(Inverse Kinematics，簡稱IK)技術!</p>
+<h3 id="正向運動學FK-v-s-反向運動學IK"><a href="#正向運動學FK-v-s-反向運動學IK" class="headerlink" title="正向運動學FK v.s. 反向運動學IK"></a>正向運動學FK v.s. 反向運動學IK</h3><p>竟然叫做反向運動學，就代表一定有正向運動學(Forward Kinematics，簡稱FK)。<br>FK其實就是我們一般情況下使用的動畫，運動時是由模型的父節點帶動子節點，也就是如果我們移動了角色的手臂，手臂下的手肘、手掌、手指都會連帶一起移動，非常的直觀。<br>而IK就是整個反過來，運動時是由模型的子節點<font color=red>反向</font>帶動父節點，也就是如果我們移動了手掌，手掌就會反向的帶動手肘、手臂移動。<br>因此我們就可以利用IK反向帶動父節點的特性，來讓指定物體帶動希望移動的部位，做出更逼真的動畫。</p>
+<h2 id="在Unity中實現IK的方法"><a href="#在Unity中實現IK的方法" class="headerlink" title="在Unity中實現IK的方法"></a>在Unity中實現IK的方法</h2><p>現在想在Unity中實現IK非常的簡單，也有很多方式可以選擇。<br>像是Unity Avator就有自帶的IK系統，可以透過程式碼實現腳貼在地板上、頭的轉向等等功能。<br>Asset Store上也有很多強大的IK套件，最著名的非<a target="_blank" rel="noopener" href="https://assetstore.unity.com/packages/tools/animation/final-ik-14290">Final IK</a>莫屬，雖然是不便宜的付費套件，但卻能做到非常細微IK控制，許多動畫大師都會使用他。<br>不過今天要介紹的是Unity近幾年推出的免費官方IK套件，Animation Rigging。<br><font color=red>Animation Rigging</font> 可以很簡單的對角色骨架設置約束(Constraint)，讓指定的部位跟隨指定物體移動，幫助我們這些即便不是專業動畫師的開發者，也能方便的製作高品質的角色動畫。</p>
+<h3 id="安裝Animation-Rigging"><a href="#安裝Animation-Rigging" class="headerlink" title="安裝Animation Rigging"></a>安裝Animation Rigging</h3><p>使用Unity 2019後的版本，在Package Manager搜尋Animation Rigging 安裝就可以了。<br>安裝完就會看到工具列出現Animation Rigging 的菜單。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/01.png"></p>
+<h3 id="基本介紹"><a href="#基本介紹" class="headerlink" title="基本介紹"></a>基本介紹</h3><p>在使用Animation Rigging之前，要先了解一些基本的元件，以及他們的結構。<br>首先我們要先認識Animation Rigging的3個最基本的元件，Rig Builder、Rig、Constraints</p>
+<ul>
+<li>Rig Builder: 使用Animation Rigging最核心的元件，負責控制所有Rig，必須要跟Animator放在同一個物件下。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/02.png"></li>
+<li>Rig: 可以存放一個或多個Constraints的容器，並可以調整weight權重，控制Constraints影響整體動畫的比例。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/03.png"></li>
+<li>Constraints: 動作的約束，也就是設定IK的元件，所有的IK效果都是透過這個元件實現。Animation Rigging提供多個Constraint元件，來實現各種不同的IK效果。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/04.png"><br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/05.png"><br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/06.png"></li>
+</ul>
+<p>他們三者的階層關係必須是</p>
+<ul>
+<li>Rig Builder要放在跟Animator同一個物件(根物件)</li>
+<li>Rig要放在Rig Builder的子物件以下</li>
+<li>Constrains要放在Rig的子物件以下<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/07.jpeg"></li>
+</ul>
+<p>有了最基本概念之後，就可以開始使用Animation Rigging來製作IK動畫了。</p>
+<h3 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h3><p>首先要準備一個角色模型跟動畫檔。這次範例使用的角色模型是Steven做的人物，動畫素材則是Asset Store上的<a target="_blank" rel="noopener" href="https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271">Basic Motions FREE</a>。<br>這裡大家可以隨意使用自己喜歡的模型與動畫素材，只要是標準的骨架就可以了。<br>因為Animation Rigging需要依賴Animator配合使用，所以也要先幫角色加入Animator元件。然後這個Animator Controller就是單純的循環撥放Idle動畫。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/08.png"></p>
+<p>註:Player底下的Amature與Body是模型自帶的骨架與皮膚。</p>
+<h3 id="開始使用"><a href="#開始使用" class="headerlink" title="開始使用"></a>開始使用</h3><p>那我們第一個來做的IK就是讓角色的頭可以看向指定物體，要做到這個效果可以透過Multi Aim Constraint元件來實現。</p>
+<h4 id="設置Rig-Builder與Rig"><a href="#設置Rig-Builder與Rig" class="headerlink" title="設置Rig Builder與Rig"></a>設置Rig Builder與Rig</h4><p>首先我們要先在有Animator的Player物件下新增Rig Builder，因為前面有提到Rig Builder是Animation Rigging最核心的元件，所以要先加入才可以使用後續的功能。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/09.png"></p>
+<p>再來是負責存放Constraint的Rig組件，我們可以在Player物件底下新增一個空物件，叫做Head Rig(名稱隨意)，並新增Rig元件。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/10.png"></p>
+<p>新增後會看到Rig提示我們這個Rig元件還沒有跟Rig Builder關聯起來，我們可以回到Player物件，將Head Rig拖進Rig Builder裡面，如此一來Rig Builder就可以控制Head Rig了。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/11.png"></p>
+<h4 id="Multi-Aim-Constraint"><a href="#Multi-Aim-Constraint" class="headerlink" title="Multi Aim Constraint"></a>Multi Aim Constraint</h4><p>接著在Head Rig物件下再新增一個空物件，叫做Multi Aim Constraint(名稱隨意)，並新增Multi Aim Constraint元件。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/12.png"></p>
+<p>這個元件顧名思義，就是用來做瞄準動作的約束，最常見的使用場景就是即將要做的角色的頭看向指定物體的IK效果。<br>然後在Head Rig下再新增一個空物件，叫做Head Target(名稱隨意)，用來當作角色要看向的物體，並把這個物體拖進Multi Aim Constraint元件的Source Objects中。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/13.png"></p>
+<p>這個Head Target不一定要放在Head Rig物件底下，只是為了方便管理選擇放這裡而已。<br>下一步要將被約束的骨頭放進Constrainted Object裡面，也就是角色的頭的骨頭。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/14.png"></p>
+<p>設定好後，就可以按下Play執行遊戲，在場景中拖動Head Target物件，就會看到我們角色的頭會一直看向這個物件囉!<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/15.gif"></p>
+<p>註:如果在Play模式下，調整Head Target到你想要的位置後，要記得複製一下他的座標數值，不然結束Play後就會還原到原本的位置喔。</p>
+<h4 id="Two-Bone-IK-Constraint"><a href="#Two-Bone-IK-Constraint" class="headerlink" title="Two Bone IK Constraint"></a>Two Bone IK Constraint</h4><p>接下來介紹Two Bone IK Constraint，顧名思義，就是控制兩個骨頭IK的元件，使用場景是最常見的手部或腳部IK，像是角色要拿場景上的物品、FPS遊戲中的持槍、人物上樓梯腳會貼在階梯上、攀爬的效果等等，可以說是應用非常廣泛的元件。<br>一樣在Player物件下新增一個空物件，叫Hand Rig(名稱隨意)，並新增Rig元件，然後跟Rig Builder關聯起來。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/16.png"></p>
+<p>然後在Hand Rig下新增叫Right Hand Constraint(名稱隨意)的空物件，並新增Two Bone IK Constraint<br>元件。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/17.png"></p>
+<p>這個元件比較特別，需要3個被約束的骨頭，同時也需要2個Source Object。<br>3個被約束的骨頭Root、Mid、Tip，必須在骨架中是相連的父子關係，像是手臂、手肘、手掌或是大腿、小腿、腳掌。<br>這裡我們就將Player的手臂、手肘、手掌分別放進Root、Mid、Tip。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/18.png"></p>
+<p>2個Source Object Target、Hint，分別是控制Tip與Mid骨頭位置的參考物件，這裡一樣在Hand Rig底下新增兩個空物件，Hand Target與Hand Hint，然後放進去Target、Hint。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/19.png"></p>
+<p>Hand Target與Hand Hint也是不一定要放在Hand Rig物件底下，一樣只是為了方便管理選擇放這裡而已。<br>設定完後，按下Play進入遊戲後，拖動Hand Target與Hand Hint看看效果。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/20.gif"></p>
+<p>註:如果在Play模式下，調整Hand Target與Hand Hint到你想要的位置後，要記得複製一下他們的座標數值，不然結束Play後就會還原到原本的位置喔。</p>
+<h4 id="Multi-Rotation-Costraint"><a href="#Multi-Rotation-Costraint" class="headerlink" title="Multi Rotation Costraint"></a>Multi Rotation Costraint</h4><p>最後來介紹Multi Rotation Costraint，顧名思義，這就是一個可以控制骨頭旋轉量的元件，可以在像是需要讓角色彎腰的情況使用。<br>還是一樣先在Player下新增空物件，叫Spine Rig(名稱隨意)，新增Rig元件後與Rig Builder關聯起來。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/21.png"></p>
+<p>在Spine Rig下新增空物件，叫Multi Rotation Costraint(名稱隨意)，新增Multi Rotation Costraint元件。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/22.png"></p>
+<p>然後在Spine Rig下再新增空一個物件Spine Target(名稱隨意)，拖進Multi Rotation Costraint元件的Source Object。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/23.png"></p>
+<p>接著設定要被約束的骨頭，就是角色的腰，把角色骨架中的spine02拖進Constrained Object裡面。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/24.png"></p>
+<p>設定完後就可以Play進入遊戲，旋轉Spine Target看看效果囉!<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/25.gif"></p>
+<p>註:如果在Play模式下，調整Spine Target到你想要的旋轉量後，要記得複製一下他的旋轉量值，不然結束Play後就會還原到原本的位置喔。</p>
+<p>到這裡我們介紹了3個常用的Constraints，當然Animation Rigging還有其他好用的Constraints，像是Multi Position Constraint，使用上都大同小異，非常好上手。<br>另外如果想做更細微的控制的話，大家也可以自己調整看看這些Constraints的參數，像是權重、偏移量等等，官方文檔中也有完整的資料可以參考。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="Rig-Transform"><a href="#Rig-Transform" class="headerlink" title="Rig Transform"></a>Rig Transform</h4><p>有的時候我們可能會把Source Object物件放在某個物件底下，並希望在移動這個物件的時候，也能夠控制IK動畫，但這是行不通的。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/26.gif"></p>
+<p>如果我們也想要可以藉由這個物件控制IK動畫的話，就需要在這個物件上新增Rig Transform元件。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/27.png"></p>
+<p>新增Rig Transform元件後，這個物件就也可以控制IK動畫囉!<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/28.gif"></p>
+<h4 id="Bone-Renderer"><a href="#Bone-Renderer" class="headerlink" title="Bone Renderer"></a>Bone Renderer</h4><p>在我們對骨頭設置約束時，需要一層一層點開角色模型的骨架，這樣非常不方便，因此Animation Rigging提供Bone Renderer元件，讓我們可以看到角色的骨架，並且只需要點擊骨頭，就可以直接選中。<br>首先，選中角色的根物件，也就是Player，然後在Animation Rigging菜單中選擇Bone Renderer Setup，就會發現Player自動新增了Bone Renderer元件，並在Editor中顯示出藍色的骨架輪廓。<br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/29.png"><br><img src="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/30.png"></p>
+<h3 id="使用Animation-Rigging的注意事項"><a href="#使用Animation-Rigging的注意事項" class="headerlink" title="使用Animation Rigging的注意事項"></a>使用Animation Rigging的注意事項</h3><p>注意在Rig Builder底下所有的子物件，及所有的後代物件的名稱不可以重複，不然會報錯。</p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>製作3D遊戲中，角色動畫往往都是成本非常高同時也是最重要的環節之一，任何一個小動作的動畫背後都需要大量的時間及專業知識，一般的獨立開發者通常只能望而卻步。<br>但隨著遊戲開發的技術日趨成熟，現在只需要熟悉掌握IK套件，任何人都可以更輕鬆地做出高品質的動畫，讓我們的遊戲更加生動!</p>
+
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/image/sidebar/avatar.jpg" alt="Wilson Lin">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>Wilson Lin
+        <br>
+        <span class="suffix-box-title">文章出處：</span><a href="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/" target="_blank">【Unity】專業動畫這樣做！10分鐘學會Animation Rigging成為動畫大師！</a>
+        <br>
+        <span class="suffix-box-title">作者簽名：</span>
+        <br>
+        <span class="suffix-box-title">關於主題：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版權聲明：</span>文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY -NC-SA</a> 許可協議，轉載請註明出處
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                    <div class="category">
+                        分類：
+                        
+                            <a href="/categories/Unity/">Unity</a>
+                        
+                            <a href="/categories/Unity/%E5%8B%95%E7%95%AB/">動畫</a>
+                        
+                            <a href="/categories/Unity/%E5%8B%95%E7%95%AB/Animation-Rigging/">Animation Rigging</a>
+                        
+                    </div>
+                
+                
+                    <div class="tag">
+                        標籤：
+                        
+                            <a href="/tags/Unity/">Unity</a>
+                        
+                            <a href="/tags/Animation-Rigging/">Animation Rigging</a>
+                        
+                            <a href="/tags/IK/">IK</a>
+                        
+                            <a href="/tags/%E5%8B%95%E7%95%AB/">動畫</a>
+                        
+                    </div>
+                
+                <div class="article-prev-next">
+                    
+                        <a href="/2023/06/22/%E3%80%90CentOS-7%E3%80%91Redis-%E5%AE%89%E8%A3%9D%E8%88%87%E9%80%A3%E6%8E%A5Spring-Boot/" class="prev-prefix">« </a> 上一篇：    <a href="/2023/06/22/%E3%80%90CentOS-7%E3%80%91Redis-%E5%AE%89%E8%A3%9D%E8%88%87%E9%80%A3%E6%8E%A5Spring-Boot/" title="發佈於 2023-06-22 03:50">【CentOS 7】Redis 安裝與連接Spring Boot</a>
+                        <br>
+                    
+                    
+                        <a href="/2023/06/22/%E3%80%90Unreal-5%E3%80%91LineTrace%E8%88%87Trace-Channel/" class="next-prefix">» </a> 下一篇：    <a href="/2023/06/22/%E3%80%90Unreal-5%E3%80%91LineTrace%E8%88%87Trace-Channel/" title="發佈於 2023-06-22 02:27">【Unreal 5】LineTrace與Trace Channel</a>
+                    
+                </div>
+            </div>
+            
+    <div class="article-comments">
+        
+            <div class="comments-title">
+                評論列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+ 
+        </div>
+    
+</div>
+    <div id="footer">
+    <div>&copy; 2023-2024 WilsonLin. All Rights Reserved.</div>
+</div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        
+            <div class="menu-notice">
+                <span class="iconfont icon-notice"></span>
+                <div class="notice">
+                    <span>歡迎來到我的Blog</span>
+                </div>
+            </div>
+        
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar">
+                    <img src="/image/sidebar/avatar.jpg">
+                </div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user">
+                        
+                            <a href="https://lin900822.github.io" target="_blank"><span>Wilson Lin</span></a>
+                        
+                    </div>
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul>
+                    
+                        <li class=""><a href="/" class="" target="_self"><span class="iconfont icon-home-fill"></span>首頁</a></li>
+                    
+                        <li class=""><a href="/category" class="" target="_self"><span class="iconfont icon-folder-fill"></span>分類</a></li>
+                    
+                        <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>標籤</a></li>
+                    
+                        <li class=""><a href="/archives" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>歸檔</a></li>
+                    
+                        <li class=""><a href="/about" class="" target="_self"><span class="iconfont icon-about-fill"></span>關於</a></li>
+                    
+                        <li class=""><a href="javascript:;" class="search" target="_self"><span class="iconfont icon-search-menu"></span>搜尋</a></li>
+                    
+                        <li class=""><a href="/comment" class="" target="_self"><span class="iconfont icon-comments-fill"></span>留言板</a></li>
+                    
+                </ul> 
+            </div> 
+            <div class="menu-link">
+                <div class="box">
+                    <div class="image-box"></div>
+                </div>
+                
+                    <a name="GitHub" href="https://github.com/lin900822" class="" target="_blank" data=""><span class="iconfont icon-github"></span></a>
+                
+            </div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="/css/search.css">
+<script type="text/javascript" src="/js/iscroll.js"></script>
+<script type="text/javascript" src="/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+    
+    <link type="text/css" rel="stylesheet" href="/css/APlayer.css">
+    <script type="text/javascript" src="/js/APlayer.min.js"></script>
+    <script type="text/javascript" src="/js/Meting.min.js"></script>
+    <script>
+        var meting_api = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+    </script>
+    <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+
+    <div class="wrap-right">
+    <div class="wrap-right-hide">
+         <!-- <div class="wrap-right-button favorites">
+            <div class="iconbox" switch="false">
+                <span class="iconfont icon-favorites"></span>
+            </div>
+            <span class="icontext">关注</span>
+         </div>
+        <div class="wrap-right-button search">
+            <div class="iconbox">
+                <span class="iconfont icon-search-menu"></span>
+            </div>
+            <span class="icontext">搜索</span>
+        </div>
+        <div class="wrap-right-button menu-button">
+            <div class="iconbox">
+                <span class="iconfont icon-menu"></span>
+            </div>
+            <span class="icontext">菜单</span>
+        </div> -->
+        <div class="wrap-right-button mode">
+            <div class="light">
+                <div class="iconbox">
+                    <span class="iconfont icon-daymode"></span>
+                </div>
+                <span class="icontext">淺色模式</span>
+            </div>
+            <div class="dark">
+                <div class="iconbox">
+                    <span class="iconfont icon-nightmode-fill"></span>
+                </div>
+                <span class="icontext">深色模式</span>
+            </div>
+        </div>
+        <div class="wrap-right-button bottom">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">跳至底部</span>
+        </div>
+    </div>
+    <div class="wrap-right-show">
+        <div class="wrap-right-button set">
+            <div class="iconbox">
+                <span class="iconfont icon-setting"></span>
+            </div>
+            <span class="icontext">設置</span>
+        </div>
+        <div class="wrap-right-button top">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">返回頂部</span>
+        </div>
+    </div>
+</div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : "lin900822",
+        GitHubRepositories : "lin900822.github.io",
+
+        User             : "Wilson Lin",
+        UserAvatar       : "/image/sidebar/avatar.jpg",
+        WebsiteStartDate : "2023-05-01",
+        Home             : "https://lin900822.github.io",
+
+        WebsiteTitleBlur         : "歡迎來到我的Blog",
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : "歡迎來到我的Blog",
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : {
+            light : "/image/website/logo/logo.png",
+            dark  : "/image/website/logo/logo-dark.png"
+        },
+
+        ProgressBar : {
+            id       : "topProgressBar",
+            color    : "#77B6FF",
+            height   : "2px",
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound : {
+                tension  : 16,
+                friction : 5
+            },
+            spinner : {
+                id     : "spinner",
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : "#F0F0F0",
+                    stroke     : "#272633",
+                    base       : "",
+                    child      : "#272633"
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : "rgba(255, 255, 255, .2)",
+            clearOffset : 0.3
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : "60%",
+            colorBrightness  : "50%",
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : "random",
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                "/image/header/home.jpg",
+            
+                "/image/header/home.jpeg",
+            
+        ],
+        HomeBannerText  : "歡迎來到我的Blog",
+
+        ArticleHeaderImage : [
+            
+                "/image/header/article.jpg",
+            
+        ],
+
+        OtherBannerText : "歡迎來到我的Blog",
+
+        Error : {
+            icon    : "icon-swimming",
+            title   : "PAGE NOT FOUND",
+            content : [
+                
+                    "很抱歉，您访问的页面不存在！",
+                
+                    "可能是输入地址有误或该地址已变更。",
+                
+            ],
+            buttons : [
+                
+                    {
+                        icon  : "icon-home",
+                        text  : "返回首页",
+                        href  : "/",
+                        class : ""
+                    },
+                
+            ]
+        },
+
+        MenuNotice : {
+            enable : true,
+            notice : "歡迎來到我的Blog",
+            speed  : 20
+        },
+        MenuList : [
+            
+                {
+                    name   : "首頁",
+                    icon   : "icon-home-fill",
+                    href   : "/",
+                    type   : "index",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "分類",
+                    icon   : "icon-folder-fill",
+                    href   : "/category",
+                    type   : "category",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "標籤",
+                    icon   : "icon-discount-fill",
+                    href   : "/tag",
+                    type   : "tag",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "歸檔",
+                    icon   : "icon-calendar-fill",
+                    href   : "/archives",
+                    type   : "archive",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "關於",
+                    icon   : "icon-about-fill",
+                    href   : "/about",
+                    type   : "about",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "搜尋",
+                    icon   : "icon-search-menu",
+                    href   : "javascript:;",
+                    type   : "",
+                    class  : "search",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "留言板",
+                    icon   : "icon-comments-fill",
+                    href   : "/comment",
+                    type   : "comment",
+                    class  : "",
+                    target : "_self"
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        name   : "GitHub",
+                        icon   : "icon-github",
+                        href   : "https://github.com/lin900822",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : "<div>&copy; 2023-2024 WilsonLin. All Rights Reserved.</div>",
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                "Based on cnblogs theme SimpleMemory.",
+                            
+                                "",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "SimpleMemory Author:",
+                            
+                                "BNDong",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "Theme:",
+                            
+                                "LiveForCode",
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : "",
+
+        Donate : {
+            paypal  : "",
+            bitcoin : "",
+            alipay  : "/image/donate/alipay.png",
+            wechat  : "/image/donate/wechat.png"
+        },
+
+        Search : {
+            applicationID : "010C3EANT8",
+            apiKey        : "c7abab9f11b79102b9aff7fe6d41447d",
+            indexName     : "Notes",
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : "搜索",
+                empty       : "未发现与 「${query}」 相关的内容",
+                stats       : "${hits} 条相关条目，使用了 ${time} 毫秒",
+            }
+        }, 
+
+        Comment : {
+            switch : true,
+            type   : "Valine",
+        },
+
+        Waline : {
+            el              : ".comments-content",
+            serverURL       : "",
+            path            : window.location.pathname,
+            meta            : "['nick', 'mail', 'link']",
+            requiredMeta    : "['nick', 'mail']",
+            pageSize        : 10,
+            lang            : "zh-cn",
+            locale: {
+                admin       : "博主",
+                anonymous   : "匿名用户",
+                sofa        : "快来做第一个评论的人吧 ~",
+                placeholder : "你是我一生只会遇见一次的惊喜...",
+            },
+            dark            : "html[color-scheme='dark']",
+            search          : false,
+            pageview        : true,
+            comment         : true,
+            copyright       : false,
+        },
+
+        Valine : {
+            el             : ".comments-content",
+            appId          : "srhKtvWPQTWYKh3qX8G8M7v0-gzGzoHsz",
+            appKey         : "8uVSP1q6UlALVC5igYfIfv2h",
+            serverURLs     : "",
+            placeholder    : "你是我一生只会遇见一次的惊喜...",
+            avatar         : "mm",
+            meta           : "nick,mail,link",
+            requiredFields : "nick,mail",
+            pageSize       : 5,
+            lang           : "zh-cn",
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : ".toc",
+            contentSelector       : ".article-body",
+            headingSelector       : "h1, h2, h3, h4, h5",
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : ".toc",
+            positionFixedClass    : "toc-fixed",
+            fixedSidebarOffset    : "",
+        },
+
+        Require : {
+            baseUrl     : "/js/",
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : "Meting"
+        },
+        APlayer : {
+            container : ".aplayer",
+            fixed     : true,
+            autoplay  : false,
+            loop      : "all",
+            order     : "random",
+            preload   : "auto",
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : "Endless Tears",
+                        artist : "CLIFF EDGE",
+                        cover  : "/music/cover/Endless Tears.jpg",
+                        url    : "/music/song/Endless Tears.mp3",
+                        lrc    : "/music/lrc/Endless Tears.lrc"
+                    },
+                
+            ]
+        },
+        Meting : {
+            api      : "https://api.i-meto.com/meting/api",
+            id       : "3778678", 
+            lrcshow  : false, 
+            server   : "netease", 
+            type     : "playlist", 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : "all", 
+            order    : "random", 
+            preload  : "auto", 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        Mouse : {
+            enable  : true,
+            options : {
+                size  : 6,
+                sizeF : 24
+            }
+        },
+
+        LazyLoad : {
+            default : "/image/website/lazyload.svg"
+        },
+  
+        Style : {
+            aplayer          : "/css/APlayer.css",
+            archive          : "/css/archive.css",
+            base             : "/css/base.css",
+            clipboard        : "/css/clipboard.css",
+            code             : "/css/code.css",
+            donate           : "/css/donate.css",
+            fancybox         : "/css/jquery.fancybox.css",
+            footer           : "/css/footer.css",
+            iconfont         : "/iconfont/iconfont.css",
+            index            : "/css/index.css",
+            menuBubble       : "/css/menu-bubble.css",
+            mouse            : "/css/mouse.css",
+            page             : "/css/page.css",
+            post             : "/css/post.css",
+            search           : "/css/search.css",
+            tocbot           : "/css/tocbot.css",
+            valine           : "/css/valine.css",
+            waline           : "/css/waline.css",
+            walineCustom     : "/css/waline-custom.css"
+        },
+
+        Script: {
+            aplayer          : "/js/APlayer.min.js",
+            config           : "/js/require.config.js",
+            index            : "/js/index.js",
+            instantSearch    : "/js/instantsearch.min.js",
+            iscroll          : "/js/iscroll.js",
+            jQuery           : "/js/jquery-3.4.1.min.js",
+            loading          : "/js/loading.js",
+            meting           : "/js/Meting.min.js",
+            require          : "/js/require.min.js",
+            waline           : "/js/waline.mjs",
+            pageview         : "/js/pageview.mjs",
+            comment          : "/js/comment.mjs",
+        },
+
+        Font: {
+            LongCang    : "/font/LongCang.css",
+            Monda       : "/font/Monda.css",
+            NotoSansSC  : "/font/NotoSansSC.css",
+            NotoSerifSC : "/font/NotoSerifSC.css",
+            Playball    : "/font/Playball.css",
+            PTMono      : "/font/PTMono.css",
+            Roboto      : "/font/Roboto.css",
+            RobotoSlab  : "/font/RobotoSlab.css",
+            Rosario     : "/font/Rosario.css",
+            UbuntuMono  : "/font/UbuntuMono.css"
+        },
+
+        Suffix : {
+            about : ""
+        },
+            
+        Theme : {
+            url  : "https://github.com/first19326/Hexo-LiveForCode",
+            name : "Hexo - Live For Code"
+        }  
+    };
+</script>
+    <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>
