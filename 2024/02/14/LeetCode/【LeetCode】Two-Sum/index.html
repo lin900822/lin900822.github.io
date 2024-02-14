@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>
         
-            歸檔
+            【LeetCode】Two Sum
         
     </title>
     <link rel="shortcut icon" href="#"/>
@@ -32,15 +32,42 @@
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body>
     <a id="cover"></a>
-    <link type="text/css" rel="stylesheet" href="/css/archive.css">
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
 <div id="header" class="header">
     <div class="vertical">
         <div class="inner">
             
-                <h1 class="header-subtitle">歸檔</h1>
+                <h1 class="header-subtitle">【LeetCode】Two Sum</h1>
                 <div class="header-subinfo">
-                    <p class="article-info-text Chinese"></p>
-                    <p class="article-info-text English"></p>                  
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 發表時間：2024-02-14
+                        </span>
+                        
+                            
+                                <span id="/2024/02/14/LeetCode/【LeetCode】Two-Sum/" class="leancloud_visitors" data-flag-title="【LeetCode】Two Sum">
+                                    <i class="iconfont icon-browse"></i> 閱讀：<sapn class="leancloud-visitors-count"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 評論：<span class="valine-comment-count" data-xid="/2024/02/14/LeetCode/【LeetCode】Two-Sum/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                        
+                            <span class="category-color">LeetCode</span>
+                        
+                    
+                    
+                        
+                            <span class="tag-color">LeetCode</span>
+                        
+                            <span class="tag-color">C++</span>
+                        
+                    
                 </div>
             
         </div>
@@ -49,140 +76,79 @@
 </div>
 <div id="container">
     
-        
-            <!-- 归档页面、分类归档页面、标签归档页面 -->
-            <div class="articles">
-                <div class="articles-wrap">
-                    <span class="archive-move-on"></span>
-                    <span class="archive-counter">
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/two-sum/description/">TwoSum(Easy)</a></p>
+<h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(std::vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    std::unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hashMap;   <span class="comment">// Key: nums的值, Value: 該值在nums中的index</span></span><br><span class="line">    <span class="keyword">auto</span> size = nums.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">        hashMap[nums[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> complement = target - nums[i];</span><br><span class="line">        <span class="keyword">if</span> (hashMap.<span class="built_in">count</span>(complement) &lt;= <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (hashMap[complement] == i) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &#123;i, hashMap[complement]&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(std::vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    std::unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; numIndexMap; <span class="comment">// Map to store number-index pairs</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="type">int</span> complement = target - nums[i]; <span class="comment">// Calculate the complement needed to achieve target sum</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check if the complement exists in the map</span></span><br><span class="line">        <span class="keyword">if</span> (numIndexMap.<span class="built_in">find</span>(complement) != numIndexMap.<span class="built_in">end</span>()) &#123;</span><br><span class="line">            <span class="comment">// If found, return the indices of the current number and its complement</span></span><br><span class="line">            <span class="keyword">return</span> &#123;numIndexMap[complement], i&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add the current number and its index to the map</span></span><br><span class="line">        numIndexMap[nums[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Return an empty vector if no solution is found</span></span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><p>最簡單暴力的做法是用2個for loop計算，但這樣時間複雜度就會是O(n²)，如果想減少成O(n)可以使用hashmap利用他快速查找的特性來實現。</p>
+<h3 id="std-unordered-map"><a href="#std-unordered-map" class="headerlink" title="std::unordered_map"></a>std::unordered_map</h3><ul>
+<li><code>count()</code>: 檢查此map中是否有傳入的元素, 如果有則回傳1, 沒有則回傳0</li>
+<li><code>find()</code>: 檢查此map中是否有傳入的元素, 如果有則回傳指向該元素的迭代器, 沒有則回傳指向end()的迭代器</li>
+</ul>
+
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/image/sidebar/avatar.jpg" alt="Wilson Lin">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>Wilson Lin
+        <br>
+        <span class="suffix-box-title">文章出處：</span><a href="/2024/02/14/LeetCode/%E3%80%90LeetCode%E3%80%91Two-Sum/" target="_blank">【LeetCode】Two Sum</a>
+        <br>
+        <span class="suffix-box-title">作者簽名：</span>
+        <br>
+        <span class="suffix-box-title">關於主題：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版權聲明：</span>文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY -NC-SA</a> 許可協議，轉載請註明出處
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                    <div class="category">
+                        分類：
                         
-                            目前共 11 篇日誌，繼續加油！
+                            <a href="/categories/LeetCode/">LeetCode</a>
                         
-                    </span>
-                    
-                    
+                    </div>
+                
+                
+                    <div class="tag">
+                        標籤：
                         
-                            <div class="archive-title">
-                                <h2 class="archive-year">2024</h2>
-                            </div>
-                            
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2024/02/14/LeetCode/%E3%80%90LeetCode%E3%80%91Two-Sum/"><span>【LeetCode】Two Sum</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">02-14</span>
-                                </div>
-                            </div>
-                        </div>
-                    
+                            <a href="/tags/LeetCode/">LeetCode</a>
                         
-                            <div class="archive-title">
-                                <h2 class="archive-year">2023</h2>
-                            </div>
-                            
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/08/09/DotNet/%E3%80%90-Net-6%E3%80%91EFCore-%E9%80%A3%E6%8E%A5MySQL/"><span>【.Net 6】EFCore 連接MySQL</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">08-09</span>
-                                </div>
-                            </div>
-                        </div>
+                            <a href="/tags/C/">C++</a>
+                        
+                    </div>
+                
+                <div class="article-prev-next">
                     
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/07/28/Unity/%E3%80%90Unity%E3%80%91%E5%A6%82%E4%BD%95%E6%B8%AC%E8%A9%A6private%E6%96%B9%E6%B3%95/"><span>【Unity】如何測試private方法</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">07-28</span>
-                                </div>
-                            </div>
-                        </div>
                     
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/07/12/Unity/%E3%80%90Unity%E3%80%91%E5%AE%89%E8%A3%9DTest-Framework/"><span>【Unity】安裝Test Framework</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">07-12</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/06/28/%E3%80%90Unreal-5%E3%80%91VRoid%E5%A0%B1%E9%8C%AFCould-not-find-definition-for-module-VRM4U/"><span>【Unreal 5】VRoid報錯Could not find definition for module 'VRM4U'</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">06-28</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/06/27/%E3%80%90Unreal-5%E3%80%91%E5%BE%9EVRoid%E5%8C%AF%E5%85%A5%E8%A7%92%E8%89%B2%E5%88%B0Unreal%E4%BD%BF%E7%94%A8/"><span>【Unreal 5】從VRoid匯入角色到Unreal使用</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">06-27</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/06/23/%E3%80%90%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B%E3%80%91%E6%A8%B9Tree/"><span>【資料結構】樹Tree概述</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">06-23</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/06/22/%E3%80%90CentOS-7%E3%80%91Redis-%E5%AE%89%E8%A3%9D%E8%88%87%E9%80%A3%E6%8E%A5Spring-Boot/"><span>【CentOS 7】Redis 安裝與連接Spring Boot</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">06-22</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/06/22/Unity/%E3%80%90Unity%E3%80%91%E5%B0%88%E6%A5%AD%E5%8B%95%E7%95%AB%E9%80%99%E6%A8%A3%E5%81%9A%EF%BC%8110%E5%88%86%E9%90%98%E5%AD%B8%E6%9C%83Animation-Rigging%E6%88%90%E7%82%BA%E5%8B%95%E7%95%AB%E5%A4%A7%E5%B8%AB%EF%BC%81/"><span>【Unity】專業動畫這樣做！10分鐘學會Animation Rigging成為動畫大師！</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">06-22</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2023/06/22/%E3%80%90Unreal-5%E3%80%91LineTrace%E8%88%87Trace-Channel/"><span>【Unreal 5】LineTrace與Trace Channel</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">06-22</span>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="/2023/08/09/DotNet/%E3%80%90-Net-6%E3%80%91EFCore-%E9%80%A3%E6%8E%A5MySQL/" class="next-prefix">» </a> 下一篇：    <a href="/2023/08/09/DotNet/%E3%80%90-Net-6%E3%80%91EFCore-%E9%80%A3%E6%8E%A5MySQL/" title="發佈於 2023-08-09 10:14">【.Net 6】EFCore 連接MySQL</a>
                     
                 </div>
             </div>
             
+    <div class="article-comments">
         
-    <div class="pagination-bottom">
-        <div class="pagination">
-            
-                <a href="/archives/page/2/">下一頁</a>
-            
-        </div>
+            <div class="comments-title">
+                評論列表
+            </div>
+        
+        <div class="comments-content"></div>
     </div>
-
+    
+ 
+        </div>
     
 </div>
     <div id="footer">
@@ -213,7 +179,7 @@
                     
                         <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>標籤</a></li>
                     
-                        <li class=" active "><a href="/archives" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>歸檔</a></li>
+                        <li class=""><a href="/archives" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>歸檔</a></li>
                     
                         <li class=""><a href="/about" class="" target="_self"><span class="iconfont icon-about-fill"></span>關於</a></li>
                     
