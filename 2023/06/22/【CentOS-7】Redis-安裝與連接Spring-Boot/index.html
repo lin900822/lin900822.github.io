@@ -194,13 +194,6 @@
     <div id="sidebar">
     <div class="menu-wrap" style="display:none;">
         
-            <div class="menu-notice">
-                <span class="iconfont icon-notice"></span>
-                <div class="notice">
-                    <span>歡迎來到我的Blog</span>
-                </div>
-            </div>
-        
         <nav class="menu">
             <div class="menu-introduce"> 
                 <div class="introduce-avatar">
@@ -282,7 +275,7 @@
     <script>
         var meting_api = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=:auth&r=:r';
     </script>
-    <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+    <meting-js id="3778678" lrcshow="false" server="" type="" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
 
     <div class="wrap-right">
     <div class="wrap-right-hide">
@@ -417,8 +410,6 @@
             
                 "/image/header/home.jpg",
             
-                "/image/header/home.jpeg",
-            
         ],
         HomeBannerText  : "喜歡研究Web前後端,DevOps,遊戲開發相關技術",
 
@@ -453,8 +444,8 @@
         },
 
         MenuNotice : {
-            enable : true,
-            notice : "歡迎來到我的Blog",
+            enable : false,
+            notice : "",
             speed  : 20
         },
         MenuList : [
@@ -679,8 +670,8 @@
             api      : "https://api.i-meto.com/meting/api",
             id       : "3778678", 
             lrcshow  : false, 
-            server   : "netease", 
-            type     : "playlist", 
+            server   : "", 
+            type     : "", 
             fixed    : true, 
             autoplay : false, 
             loop     : "all", 
